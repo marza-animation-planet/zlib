@@ -24,3 +24,12 @@
 /configure.log
 
 .DS_Store
+
+/.build
+/release
+/debug
+*.dblite
+*.cmake.inputs
+*.cmake.outputs
+/zconf.h.included
+
