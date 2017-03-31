@@ -11,11 +11,8 @@ env.CMakeConfigure("zlib", opts={"AMD64": excons.GetArgument("AMD64", 0, int)})
 out_incdir = excons.OutputBaseDirectory() + "/include"
 out_libdir = excons.OutputBaseDirectory() + "/lib"
 
-zconf_in = ["zconf.h.in"]
-zconf_out = env.CMakeGenerated(out_incdir + "/zconf.h", zconf_in)
-
-cmake_in = env.CMakeInputs(dirs=["."], patterns=[re.compile(r"^.*\.(cmakein|h|c|S)$")], exclude=zconf_in)
-cmake_out = env.CMakeOutputs(exclude=zconf_out)
+cmake_in = env.CMakeInputs(dirs=["."], patterns=[re.compile(r"^.*\.(cmakein|h|c|S)$")])
+cmake_out = env.CMakeOutputs()
 
 target = env.CMake(cmake_out, cmake_in)
 
