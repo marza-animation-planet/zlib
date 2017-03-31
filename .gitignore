@@ -31,4 +31,5 @@
 *.dblite
 *.cmake.inputs
 *.cmake.outputs
+excons.cache
 

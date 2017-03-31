@@ -7,7 +7,6 @@ env = excons.MakeBaseEnv()
 
 
 env.CMakeConfigure("zlib", opts={"AMD64": excons.GetArgument("AMD64", 0, int)})
-#env.CMakeConfigure("zlib")
 
 out_incdir = excons.OutputBaseDirectory() + "/include"
 out_libdir = excons.OutputBaseDirectory() + "/lib"
@@ -23,6 +22,7 @@ target = env.CMake(cmake_out, cmake_in)
 env.CMakeClean()
 env.Alias("zlib", target)
 
+excons.SyncCache()
 
 
 def RequireZlib(env, static=False):
