@@ -29,7 +29,6 @@
 /release
 /debug
 *.dblite
-*.cmake.inputs
-*.cmake.outputs
+*.cmake.*
 excons.cache
 
