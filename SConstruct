@@ -22,25 +22,29 @@ excons.AddHelpOptions(zlib="""CMAKE ZLIB OPTIONS
 excons.DeclareTargets(env, prjs)
 
 
-def RequireZlib(env, static=False):
-   env.Append(CPPPATH=[excons.OutputBaseDirectory() + "/include"])
-   env.Append(LIBPATH=[out_libdir])
-   if not static:
-      env.Append(CPPDEFINES=["ZLIB_DLL"])
-      if sys.platform == "win32":
-         env.Append(LIBS=["zlib"])
-      else:
-         if not excons.StaticallyLink(env, "z", silent=True):
-            env.Append(LIBS=["z"])
-   else:
-      env.Append(LIBS=["zlibstatic" if sys.platform == "win32" else "z"])
 
 def ZlibName(static=False):
    if sys.platform == "win32":
-      basename = ("zlibstatic.lib" if static else "zlib.lib")
+      libname = "zlib"
+      if static:
+         libname += "static"
    else:
-      basename = ("libz.a" if static else "libz.so")
-   return out_libdir + "/" + basename
+      libname = "z"
+   return libname
 
-Export("RequireZlib ZlibName")
+def ZlibPath(static=False):
+   name = ZlibName(static=static)
+   if sys.platform == "win32":
+      libname = name + ".lib"
+   else:
+      libname = "lib" + name + (".a" if static else excons.SharedLibraryLinkExt())
+   return out_libdir + "/" + libname
 
+def RequireZlib(env, static=False):
+   if not static:
+      env.Append(CPPDEFINES=["ZLIB_DLL"])
+   env.Append(CPPPATH=[excons.OutputBaseDirectory() + "/include"])
+   env.Append(LIBPATH=[out_libdir])
+   excons.Link(env, ZlibName(static=static), static=static, force=True, silent=True)
+
+Export("ZlibName ZlibPath RequireZlib")
