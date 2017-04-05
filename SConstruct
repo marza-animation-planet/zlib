@@ -12,7 +12,8 @@ prjs = [
    {  "name": "zlib",
       "type": "cmake",
       "cmake-opts": {"AMD64": excons.GetArgument("AMD64", 0, int)},
-      "cmake-srcs": excons.CollectFiles(".", patterns=["*.c", "*.S", "*.cmakein", "CMakeLists.txt"], recursive=True)
+      "cmake-cfgs": excons.CollectFiles(".", patterns=["CMakeLists.txt", "*.cmakein"], recursive=True),
+      "cmake-srcs": excons.CollectFiles(".", patterns=["*.c", "*.S"], recursive=True)
    }
 ]
 
