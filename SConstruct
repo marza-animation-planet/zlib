@@ -17,8 +17,9 @@ prjs = [
    }
 ]
 
-excons.AddHelpOptions(zlib="""CMAKE ZLIB OPTIONS
+excons.AddHelpOptions(zlib="""ZLIB OPTIONS
   AMD64=0|1 : Enable building amd64 assembly implementation""")
+
 excons.DeclareTargets(env, prjs)
 
 
