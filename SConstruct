@@ -35,6 +35,7 @@ def RequireZlib(env, static=False):
 prjs = [
    {  "name": "zlib",
       "type": "cmake",
+      "cmake-min-mscver": 11.0,
       "cmake-opts": {"AMD64": excons.GetArgument("zlib-amd64", 0, int)},
       "cmake-cfgs": excons.CollectFiles(".", patterns=["CMakeLists.txt", "*.cmakein"], recursive=True),
       "cmake-srcs": excons.CollectFiles(".", patterns=["*.c", "*.S"], recursive=True),
