@@ -13,6 +13,8 @@ def ZlibName(static=False):
       libname = "zlib"
       if static:
          libname += "static"
+      if excons.GetArgument("debug", 0, int) != 0:
+         libname += "d"
    else:
       libname = "z"
    return libname
